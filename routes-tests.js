@@ -1,13 +1,14 @@
 var test = require ('tape')
 var routes = require('./routes')
 
-test('routes.home responds with index.html', function (t) {
-  var res = { sendFile: sendFile }
+test('routes.webapps response includes a querystring parameter', function (t) {
+  var res = { send: send }
+  var req = { query: {name: 'Andrew' } }
   //actual
-  routes.home(null, res)
-  //actual
-  function sendFile (file) {
-    t.equals(file, __dirname + '/index.html')
+  routes.webapps(req, res)
+  //expected
+  function send (msg) {
+    t.equals(msg, 'Andrew is building web apps')
     t.end()
   }
 })
